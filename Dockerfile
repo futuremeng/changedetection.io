@@ -10,6 +10,10 @@ FROM python:${PYTHON_VERSION}-slim-bookworm AS builder
 # See `cryptography` pin comment in requirements.txt
 ARG CRYPTOGRAPHY_DONT_BUILD_RUST=1
 
+RUN sed -i 's/deb.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list.d/debian.sources
+# RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources
+
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     g++ \
     gcc \
@@ -38,6 +42,8 @@ RUN pip install --target=/dependencies playwright~=1.48.0 \
 # Final image stage
 FROM python:${PYTHON_VERSION}-slim-bookworm
 LABEL org.opencontainers.image.source="https://github.com/dgtlmoon/changedetection.io"
+
+RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libxslt1.1 \
