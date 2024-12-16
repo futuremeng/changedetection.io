@@ -41,7 +41,7 @@ RUN pip install --target=/dependencies playwright~=1.48.0 \
 
 # Final image stage
 FROM python:${PYTHON_VERSION}-slim-bookworm
-LABEL org.opencontainers.image.source="https://github.com/dgtlmoon/changedetection.io"
+LABEL org.opencontainers.image.source="https://github.com/futuremeng/changedetection.io"
 
 RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources
 
